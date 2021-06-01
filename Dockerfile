@@ -7,6 +7,8 @@ RUN go build -mod=vendor -a -v -tags 'netgo' -ldflags '-w -extldflags -static' -
 
 FROM alpine:latest
 RUN apk add -U --no-cache curl
+RUN adduser -D 1001
+USER 1001
 COPY app/static /static
 COPY --from=app /go/src/app/docker-demo /bin/docker-demo
 COPY app/templates /templates
